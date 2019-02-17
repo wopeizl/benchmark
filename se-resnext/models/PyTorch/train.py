@@ -59,7 +59,8 @@ def train_model(args, model, criterion, optimizer, scheduler, num_epochs, datase
                     optimizer.step()
 
                 # statistics
-                running_loss += loss.data[0]
+                #running_loss += loss.data[0]
+                running_loss += loss.item()
                 running_corrects += torch.sum(preds == labels.data)
 
                 batch_loss = running_loss / ((i+1)*args.batch_size)
@@ -93,7 +94,7 @@ def train_model(args, model, criterion, optimizer, scheduler, num_epochs, datase
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="PyTorch implementation of SENet")
-    parser.add_argument('--data-dir', type=str, default="/ImageNet")
+    parser.add_argument('--data-dir', type=str, default="/data/pzl/imagenet/")
     parser.add_argument('--batch-size', type=int, default=16)
     parser.add_argument('--num-class', type=int, default=1000)
     parser.add_argument('--num-epochs', type=int, default=100)
@@ -105,7 +106,7 @@ if __name__ == '__main__':
     parser.add_argument('--save-path', type=str, default="output")
     parser.add_argument('--resume', type=str, default="", help="For training from one checkpoint")
     parser.add_argument('--start-epoch', type=int, default=0, help="Corresponding to the epoch of resume ")
-    parser.add_argument('--network', type=str, default="se_resnet_50", help="")
+    parser.add_argument('--network', type=str, default="se_resnext_50", help="")
     args = parser.parse_args()
 
     # read data

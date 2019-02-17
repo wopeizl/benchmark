@@ -34,8 +34,8 @@ class Bottleneck(nn.Module):
             self.globalAvgPool = nn.AvgPool2d(14, stride=1)
         elif planes == 512:
             self.globalAvgPool = nn.AvgPool2d(7, stride=1)
-        self.fc1 = nn.Linear(in_features=planes * 4, out_features=round(planes / 4))
-        self.fc2 = nn.Linear(in_features=round(planes / 4), out_features=planes * 4)
+        self.fc1 = nn.Linear(in_features=planes * 4, out_features=int(round(planes / 4)))
+        self.fc2 = nn.Linear(in_features=int(round(planes / 4)), out_features=planes * 4)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
